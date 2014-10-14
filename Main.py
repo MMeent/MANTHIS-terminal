@@ -43,9 +43,10 @@ infoFrame.grid_propagate(False)
 scrollBar = Scrollbar(orderlistFrame)
 scrollBar.pack(side=RIGHT, fill=Y)
 #einde scrollbar
-
-bedragLabel = Label(infoFrame, text="Bedrag: ", bd=20)
-bedragLabel.grid(column=0, row=0)
+bedragTxtLabel = Label(infoFrame, text="Bedrag: ", bd=20)
+bedragTxtLabel.grid(column=0, row=0)
+bedragLabel = Label(infoFrame, textvariable=root.buying_list.total_str, bd=20)
+bedragLabel.grid(column=1, row=0)
 statusLabel = Label(infoFrame, text="Wachtend", bd=20)
 statusLabel.grid(column=0, row=1)
 
