@@ -10,6 +10,7 @@ root.geometry('{}x{}'.format(screenWidth, screenHeight))
 buttonSize = 300
 currentAantal = 26
 
+
 """ vormt en plaatst de drie grote frames die scherm opdelen"""
 #oderFrame komt alles in wat met de info van de bestelling te maken heeft
 orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
@@ -22,7 +23,7 @@ itemFrame.grid_propagate(False)
 #overigFrame komt alle andere functionaliteiten in
 overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
 overigFrame.grid(column=1, row=1, columnspan=2)
-overigFrame.grid_propagate(False)
+overigFrame.pack_propagate(False)
 """einde grote frames"""
 
 """vormt en plaatst kleinere frames"""
@@ -33,6 +34,11 @@ orderlistFrame.pack_propagate(False)
 infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
 infoFrame.grid(column=0, row=1)
 infoFrame.grid_propagate(False)
+
+#frame voor - aantal +
+plusminFrame = Frame(overigFrame)
+plusminFrame.pack()
+#plusminFrame.grid_propagate(False)
 """einde kleinere frames"""
 
 """daadwerkelijke widgets"""
@@ -51,16 +57,17 @@ statusLabel.grid(column=0, row=1)
 
 
 #slider
-aantalLabel = Label(overigFrame, text=currentAantal)
-aantalLabel.grid()
+aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 20")
+aantalLabel.grid(column=1, row=0)
 
-plusLabel = Label(overigFrame, text="+")
+plusLabel = Label(plusminFrame, text=" + ", font="Arial 30")
+plusLabel.grid(column=2, row=0)
+minLabel = Label(plusminFrame, text=" − ", font="Arial 30")
+minLabel.grid(column=0, row=0)
 
-minLabel = Label(overigFrame, text="-")
-
-slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=200)
-slider.grid(column=0, row=1)
-
+slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=400)
+#slider.grid(column=0, row=1)
+slider.pack()
 
 
 
