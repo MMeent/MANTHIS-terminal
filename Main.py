@@ -1,31 +1,52 @@
 from tkinter import *
 root = Tk(screenName="Name", baseName="Name", className="Name")
-root.resizable = TRUE
+root.resizable(width=FALSE, height=FALSE)
 screenWidth = 1024
 screenHeight = 720
-#test = Frame(root, bg="red", width=100, height=100).pack(side=LEFT)
+root.geometry('{}x{}'.format(screenWidth, screenHeight))
 
-#frame = Frame(root, width=screenWidth, height=screenHeight, bg="yellow").grid()
-#textFrame = Frame(root, width=screenWidth/3, height=screenHeight, bg="", colormap="new").pack()
-#buttonFrame = Frame(frame).pack(anchor=E)
+""" vormt en plaatst de drie grote frames die scherm opdelen"""
+#oderFrame komt alles in wat met de info van de bestelling te maken heeft
+orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
+orderFrame.grid(column=0, row=0, rowspan=2)
+orderFrame.grid_propagate(False)
+#komen alle items in te staan (de artikelen)
+itemFrame = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100), bg="green")
+itemFrame.grid(column=1, row=0, columnspan=2)
+itemFrame.grid_propagate(False)
+#overigFrame komt alle andere functionaliteiten in
+overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
+overigFrame.grid(column=1, row=1, columnspan=2)
+"""einde grote frames"""
 
-boughtItemList = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
-boughtItemList.grid(column=0, row=0, rowspan=2)
-sellingItemList = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100), bg="green")
-sellingItemList.grid(column=1, row=0, columnspan=2)
-calculator = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
-calculator.grid(column=1, row=1, columnspan=2)
+"""vormt en plaatst kleinere frames"""
+orderlistFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
+orderlistFrame.grid(column=0, row=0)
+orderlistFrame.pack_propagate(False)
 
-itemList = Text(boughtItemList, width=screenWidth/3, height=(2*screenHeight/3))
-"""
-button1 = Button(boughtItemList, text="button1", borderwidth=10, relief=FLAT)
-button1.pack()
-button2 = Button(sellingItemList, text="button2", borderwidth=10, relief=FLAT)
-button2.grid(column=0, row=0)
-button3 = Button(calculator, text="button3", borderwidth=10, relief=FLAT)
-button3.grid(column=0, row=0)
-"""
-#itemList = Text(frame).grid(column=0, row=1)
+infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
+infoFrame.grid(column=0, row=1)
+infoFrame.grid_propagate(False)
+"""einde kleinere frames"""
+
+"""daadwerkelijke widgets"""
+itemList = Text(orderlistFrame, height = screenHeight/3*2)
+itemList.pack()
+
+bedragLabel = Label(infoFrame, text="Bedrag: ", bd=20)
+bedragLabel.grid(column=0, row=0)
+statusLabel = Label(infoFrame, text="Wachtend", bd=20)
+statusLabel.grid(column=0, row=1)
+
+
+"""einde daadwerkelijke widgets"""
+
+
+
+
+
+
+
 
 bottomBar = Frame(root, width=screenWidth, height=40, bg="black")
 bottomBar.grid(column=0, row=2, columnspan=3)
