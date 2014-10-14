@@ -37,7 +37,7 @@ class Item:
 
     def create_item_tile(self, parent: Widget=None):
         tile = Frame(parent, bg="black")
-        tile.pack_propagate(False)
+        tile.grid_propagate(False)
         if self.image_link:
             img = PhotoImage(file=self.image_link)
             img_lbl = Label(tile, image=img, height=50, width=50)
@@ -48,6 +48,14 @@ class Item:
             img_lbl.grid(column=0, row=0, columnspan=3)
         name_label = Label(tile, text=self.name, font=(Arial, 12))
         name_label.grid(column=0, row=1, columnspan=2)
-        price_label = Label(tile, text=str(self.price), font=(Arial, 14, bold))
+        price_label = Label(tile, text=str(self.price), font=("Arial", 14, "bold"))
         price_label.grid(column=2, row=1)
+        tile.item = self
+
+        def on_click(event):
+            tile.focus_set()
+            tile.master().buying_list.add(tile.item.get_item_stack(1))
+
+        tile.on_click = on_click
+        tile.bind("<Button-1>", tile.on_click)
         return tile
