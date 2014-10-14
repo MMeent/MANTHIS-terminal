@@ -65,7 +65,7 @@ slider.grid(column=0, row=1)
 
 
 """einde daadwerkelijke widgets"""
-
+"""
 bottomBar = Frame(root, width=SCREENWIDTH, height=40, bg="black")
 bottomBar.grid(column=0, row=2, columnspan=3)
 status = Label(bottomBar, text="Waiting for action", bd=1, relief=SUNKEN).pack(fill=Y)
