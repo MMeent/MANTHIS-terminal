@@ -1,5 +1,8 @@
 from tkinter import *
+from Terminal.BuyingList import BuyingList
+
 root = Tk(screenName="Name", baseName="Name", className="Name")
+root.buying_list = BuyingList()
 root.resizable(width=FALSE, height=FALSE)
 screenWidth = 1024
 screenHeight = 720
