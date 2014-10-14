@@ -16,7 +16,7 @@ sellingItemList.grid(column=1, row=0, columnspan=2)
 calculator = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
 calculator.grid(column=1, row=1, columnspan=2)
 
-itemList = Text(boughtItemList, width=screenWidth/3, height=(2*screenHeigth/3)
+itemList = Text(boughtItemList, width=screenWidth/3, height=(2*screenHeight/3))
 """
 button1 = Button(boughtItemList, text="button1", borderwidth=10, relief=FLAT)
 button1.pack()
