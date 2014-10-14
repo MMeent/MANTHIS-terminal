@@ -7,6 +7,8 @@ root.resizable(width=FALSE, height=FALSE)
 screenWidth = 1024
 screenHeight = 720
 root.geometry('{}x{}'.format(screenWidth, screenHeight))
+buttonSize = 300
+currentAantal = 26
 
 """ vormt en plaatst de drie grote frames die scherm opdelen"""
 #oderFrame komt alles in wat met de info van de bestelling te maken heeft
@@ -20,6 +22,7 @@ itemFrame.grid_propagate(False)
 #overigFrame komt alle andere functionaliteiten in
 overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
 overigFrame.grid(column=1, row=1, columnspan=2)
+overigFrame.grid_propagate(False)
 """einde grote frames"""
 
 """vormt en plaatst kleinere frames"""
@@ -33,8 +36,13 @@ infoFrame.grid_propagate(False)
 """einde kleinere frames"""
 
 """daadwerkelijke widgets"""
-itemList = Text(orderlistFrame, height = screenHeight/3*2)
-itemList.pack()
+
+
+
+#scrollbar
+scrollBar = Scrollbar(orderlistFrame)
+scrollBar.pack(side=RIGHT, fill=Y)
+#einde scrollbar
 
 bedragLabel = Label(infoFrame, text="Bedrag: ", bd=20)
 bedragLabel.grid(column=0, row=0)
@@ -42,17 +50,24 @@ statusLabel = Label(infoFrame, text="Wachtend", bd=20)
 statusLabel.grid(column=0, row=1)
 
 
+#slider
+aantalLabel = Label(overigFrame, text=currentAantal)
+aantalLabel.grid()
+
+plusLabel = Label(overigFrame, text="+")
+
+minLabel = Label(overigFrame, text="-")
+
+slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=200)
+slider.grid(column=0, row=1)
+
+
+
+
 """einde daadwerkelijke widgets"""
 
-
-
-
-
-
-
-
-bottomBar = Frame(root, width=screenWidth, height=40, bg="black")
+bottomBar = Frame(root, width=SCREENWIDTH, height=40, bg="black")
 bottomBar.grid(column=0, row=2, columnspan=3)
 status = Label(bottomBar, text="Waiting for action", bd=1, relief=SUNKEN).pack(fill=Y)
-
+"""
 root.mainloop()
