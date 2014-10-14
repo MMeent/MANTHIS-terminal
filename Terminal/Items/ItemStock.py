@@ -1,7 +1,7 @@
 __author__ = 'Matthias'
 
 from Terminal.Items.Item import Item
-from Tkinter import *
+from tkinter import *
 
 
 class ItemStock:

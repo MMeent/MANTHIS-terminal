@@ -1,7 +1,7 @@
 __author__ = 'Matthias'
 
-from Terminal.Items.ItemStock import ItemStock
-from Tkinter import *
+import Terminal.Items.ItemStock
+from tkinter import *
 
 
 class Item:
@@ -29,7 +29,7 @@ class Item:
     def get_image_link(self):
         return self.image_link
 
-    def get_item_stack(self, amount: int):
+    def get_item_stock(self, amount: int):
         return ItemStock(self, amount)
 
     def get_item_tile(self):
@@ -54,7 +54,7 @@ class Item:
 
         def on_click(event):
             tile.focus_set()
-            tile.master().buying_list.add(tile.item.get_item_stack(1))
+            tile.master().buying_list.add(tile.item.get_item_stock(1))
 
         tile.on_click = on_click
         tile.bind("<Button-1>", tile.on_click)
