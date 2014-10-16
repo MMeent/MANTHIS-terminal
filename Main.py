@@ -10,12 +10,21 @@ root.geometry('{}x{}'.format(screenWidth, screenHeight))
 buttonSize = 300
 currentAantal = 26
 
-
+"""functies voor slider en label"""
 def plus_click(event):
-    if slider["length"] == slider.get():
-        return
     slider.set(slider.get() + 1)
     aantalLabel.update()
+
+def min_click(event):
+    slider.set(slider.get() - 1)
+    aantalLabel.update()
+
+def u(e):
+    aantalLabel.update()
+
+def update():
+    aantalLabel["text"] = slider.get()
+"""einde functies"""
 
 
 """ vormt en plaatst de drie grote frames die scherm opdelen"""
@@ -33,6 +42,7 @@ overigFrame.grid(column=1, row=1, columnspan=2)
 overigFrame.pack_propagate(False)
 """einde grote frames"""
 
+
 """vormt en plaatst kleinere frames"""
 orderlistFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
 orderlistFrame.grid(column=0, row=0)
@@ -48,10 +58,8 @@ plusminFrame.pack()
 #plusminFrame.grid_propagate(False)
 """einde kleinere frames"""
 
+
 """daadwerkelijke widgets"""
-
-
-
 #scrollbar
 scrollBar = Scrollbar(orderlistFrame)
 scrollBar.pack(side=RIGHT, fill=Y)
@@ -63,10 +71,10 @@ bedragLabel.grid(column=1, row=0)
 statusLabel = Label(infoFrame, text="Wachtend", bd=20)
 statusLabel.grid(column=0, row=1)
 
+root.scrollBar = scrollBar
 
 #slider
-def update():
-    aantalLabel["text"] = slider.get()
+
 aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 20")
 aantalLabel.grid(column=1, row=0)
 aantalLabel.update = update
@@ -78,20 +86,11 @@ minLabel.grid(column=0, row=0)
 
 plusLabel.on_click = plus_click
 plusLabel.bind("<Button-1>", plusLabel.on_click)
+minLabel.on_click = min_click
+minLabel.bind("<Button-1>", minLabel.on_click)
 
-slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=400)
-#slider.grid(column=0, row=1)
+slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=400, from_=1, to=25, command=u)
 slider.pack()
-
-
-
-
-
-
 """einde daadwerkelijke widgets"""
-"""
-bottomBar = Frame(root, width=SCREENWIDTH, height=40, bg="black")
-bottomBar.grid(column=0, row=2, columnspan=3)
-status = Label(bottomBar, text="Waiting for action", bd=1, relief=SUNKEN).pack(fill=Y)
-"""
+
 root.mainloop()
