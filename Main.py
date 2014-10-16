@@ -11,6 +11,13 @@ buttonSize = 300
 currentAantal = 26
 
 
+def plus_click(event):
+    if slider["length"] == slider.get():
+        return
+    slider.set(slider.get() + 1)
+    aantalLabel.update()
+
+
 """ vormt en plaatst de drie grote frames die scherm opdelen"""
 #oderFrame komt alles in wat met de info van de bestelling te maken heeft
 orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
@@ -58,17 +65,26 @@ statusLabel.grid(column=0, row=1)
 
 
 #slider
+def update():
+    aantalLabel["text"] = slider.get()
 aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 20")
 aantalLabel.grid(column=1, row=0)
+aantalLabel.update = update
 
 plusLabel = Label(plusminFrame, text=" + ", font="Arial 30")
 plusLabel.grid(column=2, row=0)
 minLabel = Label(plusminFrame, text=" − ", font="Arial 30")
 minLabel.grid(column=0, row=0)
 
+plusLabel.on_click = plus_click
+plusLabel.bind("<Button-1>", plusLabel.on_click)
+
 slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=400)
 #slider.grid(column=0, row=1)
 slider.pack()
+
+
+
 
 
 
