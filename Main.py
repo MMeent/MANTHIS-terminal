@@ -24,6 +24,9 @@ def u(e):
 
 def update():
     aantalLabel["text"] = slider.get()
+
+def afrekenClick():
+    return
 """einde functies"""
 
 
@@ -37,7 +40,7 @@ itemFrame = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100)
 itemFrame.grid(column=1, row=0, columnspan=2)
 itemFrame.grid_propagate(False)
 #overigFrame komt alle andere functionaliteiten in
-overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100, bg="blue")
+overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100)
 overigFrame.grid(column=1, row=1, columnspan=2)
 overigFrame.pack_propagate(False)
 """einde grote frames"""
@@ -52,10 +55,16 @@ infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
 infoFrame.grid(column=0, row=1)
 infoFrame.grid_propagate(False)
 
+afrekenbuttonFrame = Frame(overigFrame, width=100, height=100)
+afrekenbuttonFrame.pack(side=RIGHT, anchor=N)
+afrekenbuttonFrame.pack_propagate(False)
+
 #frame voor - aantal +
 plusminFrame = Frame(overigFrame)
-plusminFrame.pack()
+plusminFrame.pack(anchor=N)
 #plusminFrame.grid_propagate(False)
+
+
 """einde kleinere frames"""
 
 
@@ -75,13 +84,13 @@ root.scrollBar = scrollBar
 
 #slider
 
-aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 20")
+aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 35",  width=2)
 aantalLabel.grid(column=1, row=0)
 aantalLabel.update = update
 
-plusLabel = Label(plusminFrame, text=" + ", font="Arial 30")
+plusLabel = Label(plusminFrame, text=" + ", font="Arial 46")
 plusLabel.grid(column=2, row=0)
-minLabel = Label(plusminFrame, text=" − ", font="Arial 30")
+minLabel = Label(plusminFrame, text=" − ", font="Arial 46")
 minLabel.grid(column=0, row=0)
 
 plusLabel.on_click = plus_click
@@ -89,8 +98,12 @@ plusLabel.bind("<Button-1>", plusLabel.on_click)
 minLabel.on_click = min_click
 minLabel.bind("<Button-1>", minLabel.on_click)
 
-slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, length=400, from_=1, to=25, command=u)
-slider.pack()
+slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, from_=1, to=25, command=u)
+slider.pack(fill=X, side=BOTTOM)
+
+afrekenButton = Button(afrekenbuttonFrame, text="Afrekenen", command=afrekenClick, height=50)
+afrekenButton.pack(fill=BOTH)
+
 """einde daadwerkelijke widgets"""
 
 root.mainloop()
