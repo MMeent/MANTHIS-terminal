@@ -1,8 +1,15 @@
-from tkinter import *
 from Terminal.BuyingList import BuyingList
+from Terminal.Items.Item import Item
+from Terminal.Items.ItemStock import ItemStock
+from Terminal.Registries import ItemRegistry
+
+from tkinter import *
+
+import json
+
 
 root = Tk(screenName="Name", baseName="Name", className="Name")
-root.buying_list = BuyingList()
+root.item_registry = ItemRegistry()
 root.resizable(width=FALSE, height=FALSE)
 screenWidth = 1024
 screenHeight = 720
@@ -11,22 +18,34 @@ buttonSize = 300
 currentAantal = 26
 
 """functies voor slider en label"""
+
+
 def plus_click(event):
     slider.set(slider.get() + 1)
-    aantalLabel.update()
+    root.update()
+
 
 def min_click(event):
     slider.set(slider.get() - 1)
-    aantalLabel.update()
+    root.update()
+
 
 def u(e):
-    aantalLabel.update()
+    root.update()
+
 
 def update():
     aantalLabel["text"] = slider.get()
+    root.buying_list.active_tile_handler.active_tile.amount = slider.get()
+    aantalLabel["text"] = root.buying_list.active_tile_handler.active_tile.item_stock.get_amount()
+    bedragLabel["text"] = root.buying_list.get_total()
+    root.buying_list.active_tile_handler.active_tile.update()
+
 
 def afrekenClick():
     return
+
+
 """einde functies"""
 
 
@@ -35,6 +54,7 @@ def afrekenClick():
 orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
 orderFrame.grid(column=0, row=0, rowspan=2)
 orderFrame.grid_propagate(False)
+root.order_frame = orderFrame
 #komen alle items in te staan (de artikelen)
 itemFrame = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100), bg="green")
 itemFrame.grid(column=1, row=0, columnspan=2)
@@ -50,6 +70,9 @@ overigFrame.pack_propagate(False)
 orderlistFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
 orderlistFrame.grid(column=0, row=0)
 orderlistFrame.pack_propagate(False)
+root.orderlistFrame = orderlistFrame
+
+root.buying_list = BuyingList(orderlistFrame)
 
 infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
 infoFrame.grid(column=0, row=1)
@@ -86,7 +109,7 @@ root.scrollBar = scrollBar
 
 aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 35",  width=2)
 aantalLabel.grid(column=1, row=0)
-aantalLabel.update = update
+root.update = update
 
 plusLabel = Label(plusminFrame, text=" + ", font="Arial 46")
 plusLabel.grid(column=2, row=0)
@@ -103,6 +126,20 @@ slider.pack(fill=X, side=BOTTOM)
 
 afrekenButton = Button(afrekenbuttonFrame, text="Afrekenen", command=afrekenClick, height=50)
 afrekenButton.pack(fill=BOTH)
+
+
+with open("Terminal/Items/Items.json") as jsonfile:
+    data = json.load(jsonfile)
+    for item in data:
+        root.item_registry.add(Item(item["name"], item["price"]))
+
+i = 0
+for item in root.item_registry.get_items():
+    print(item[1].tile)
+    item[1].create_item_tile(i % 4, i // 4, itemFrame)
+    i += 1
+
+itemFrame.grid()
 
 """einde daadwerkelijke widgets"""
 

@@ -1,20 +1,22 @@
 __author__ = 'Matthias'
 
-import Terminal.Items.ItemStock
+from Terminal.Items.ItemStock import ItemStock
 from tkinter import *
 
 
 class Item:
     def __init__(self, name: str, price: float, image_link: str=None):
+        print("n:" + name + "p:" + str(price))
         self.name = name
         self.price = price
         self.image_link = image_link
-        self.tile = self.create_item_tile()
+        self.tile = None
 
     def set_image(self, link: str):
         self.image_link = link
 
     def set_price(self, price: float):
+        print(price)
         self.price = price
 
     def set_name(self, name: str):
@@ -35,27 +37,37 @@ class Item:
     def get_item_tile(self):
         return self.tile
 
-    def create_item_tile(self, parent: Widget=None):
-        tile = Frame(parent, bg="black")
+    def create_item_tile(self, column=0, row=0, parent=None):
+        tile = Frame(parent, bg="black", width=150, height=150, border=1)
         tile.grid_propagate(False)
+        tile.grid(column=column, row=row)
+
         if self.image_link:
             img = PhotoImage(file=self.image_link)
-            img_lbl = Label(tile, image=img, height=50, width=50)
-            img_lbl.img = img
-            img_lbl.grid(column=0, row=0, columnspan=3)
+            tile.img_lbl = Label(tile, image=img, height=150, width=150)
+            tile.img_lbl.img = img
+            tile.img_lbl.grid(column=0, row=0, columnspan=3)
         else:
-            img_lbl = Label(tile, height=50, width=50, color="gray")
-            img_lbl.grid(column=0, row=0, columnspan=3)
-        name_label = Label(tile, text=self.name, font=(Arial, 12))
-        name_label.grid(column=0, row=1, columnspan=2)
-        price_label = Label(tile, text=str(self.price), font=("Arial", 14, "bold"))
-        price_label.grid(column=2, row=1)
+            tile.img_lbl = Label(tile, height=150, width=150)
+            tile.img_lbl.grid(column=0, row=0, columnspan=3)
+
+        tile.name_label = Label(tile, text=self.name, font=("Arial", 12))
+        tile.name_label.grid(column=0, row=1, columnspan=2)
+
+        tile.price_label = Label(tile, text=str(self.price), font=("Arial", 14, "bold"))
+        tile.price_label.grid(column=2, row=1)
+
         tile.item = self
 
         def on_click(event):
+            print("click" + str(tile))
             tile.focus_set()
-            tile.master().buying_list.add(tile.item.get_item_stock(1))
+            tile.winfo_toplevel().buying_list.add(tile.item.get_item_stock(1))
 
         tile.on_click = on_click
-        tile.bind("<Button-1>", tile.on_click)
+        tile.bind("<Button>", tile.on_click)
+        for child in tile.children.values():
+            child.bind("<Button>", tile.on_click)
+        self.tile = tile
+        print(str(tile) + "  " + str(column) + "  " + str(row))
         return tile
