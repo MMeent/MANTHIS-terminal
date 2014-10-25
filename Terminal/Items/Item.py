@@ -44,17 +44,17 @@ class Item:
 
         if self.image_link:
             img = PhotoImage(file=self.image_link)
-            tile.img_lbl = Label(tile, image=img, height=150, width=150)
+            tile.img_lbl = Label(tile, image=img, height=100, width=150)
             tile.img_lbl.img = img
             tile.img_lbl.grid(column=0, row=0, columnspan=3)
         else:
-            tile.img_lbl = Label(tile, height=150, width=150)
+            tile.img_lbl = Frame(tile, height=100, width=150)
             tile.img_lbl.grid(column=0, row=0, columnspan=3)
 
-        tile.name_label = Label(tile, text=self.name, font=("Arial", 12))
+        tile.name_label = Label(tile, text=self.name)
         tile.name_label.grid(column=0, row=1, columnspan=2)
 
-        tile.price_label = Label(tile, text=str(self.price), font=("Arial", 14, "bold"))
+        tile.price_label = Label(tile, text=str(self.price))
         tile.price_label.grid(column=2, row=1)
 
         tile.item = self

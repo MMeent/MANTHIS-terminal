@@ -7,6 +7,7 @@ class ItemStock:
     def __init__(self, item, amount: int):
         self.item = item
         self.amount = amount
+        self.amountvar = StringVar()
         self.tile = None
 
     def add(self, amount: int):
@@ -49,7 +50,7 @@ class ItemStock:
 
         def on_click(event):
             tile.focus_set()
-            tile.master.buying_list.set_active_tile(tile)
+            tile.winfo_toplevel().buying_list.set_active_tile(tile)
 
         tile.on_click = on_click
 

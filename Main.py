@@ -1,6 +1,5 @@
 from Terminal.BuyingList import BuyingList
 from Terminal.Items.Item import Item
-from Terminal.Items.ItemStock import ItemStock
 from Terminal.Registries import ItemRegistry
 
 from tkinter import *
@@ -35,9 +34,8 @@ def u(e):
 
 
 def update():
-    aantalLabel["text"] = slider.get()
-    root.buying_list.active_tile_handler.active_tile.amount = slider.get()
-    aantalLabel["text"] = root.buying_list.active_tile_handler.active_tile.item_stock.get_amount()
+    root.buying_list.active_tile_handler.get().item_stock.set_amount(slider.get())
+    aantalLabel["text"] = root.buying_list.active_tile_handler.get().item_stock.get_amount()
     bedragLabel["text"] = root.buying_list.get_total()
     root.buying_list.active_tile_handler.active_tile.update()
 
@@ -117,12 +115,13 @@ minLabel = Label(plusminFrame, text=" − ", font="Arial 46")
 minLabel.grid(column=0, row=0)
 
 plusLabel.on_click = plus_click
-plusLabel.bind("<Button-1>", plusLabel.on_click)
+plusLabel.bind("<Button>", plusLabel.on_click)
 minLabel.on_click = min_click
-minLabel.bind("<Button-1>", minLabel.on_click)
+minLabel.bind("<Button>", minLabel.on_click)
 
 slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, from_=1, to=25, command=u)
 slider.pack(fill=X, side=BOTTOM)
+root.slider = slider
 
 afrekenButton = Button(afrekenbuttonFrame, text="Afrekenen", command=afrekenClick, height=50)
 afrekenButton.pack(fill=BOTH)

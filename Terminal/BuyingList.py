@@ -15,17 +15,19 @@ class BuyingList:
         self.total()
 
     def add(self, item_stock: ItemStock):
-        if self.active_tile_handler.get().item_stock.get_name() == item_stock.get_name():
+        if self.active_tile_handler.get().item_stock.get_name() == item_stock.get_name()\
+                and self.active_tile_handler.get().item_stock.get_amount() < 25:
             self.active_tile_handler.add(1)
         else:
             self.items.append(item_stock)
-
-        #self.master.orderlistFrame
+            self.render(item_stock)
         self.total()
-        self.render(item_stock)
+
 
     def render(self, item_stock: ItemStock):
-        item_stock.create_item_tile(self.master).pack()
+        tile = item_stock.create_item_tile(self.master)
+        tile.pack()
+        self.active_tile_handler.set_tile(tile)
 
     def get_total(self):
         total = 0
