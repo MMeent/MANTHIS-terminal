@@ -1,10 +1,18 @@
 [
     {
     "name": "Item",
-    "price": 10
+    "price": 0.25
     },
     {
     "name": "item2",
-    "price": 20
+    "price": 0.50
+    },
+    {
+    "name": "item3",
+    "price": 1.00
+    },
+    {
+    "name": "item4",
+    "price": 2.50
     }
 ]

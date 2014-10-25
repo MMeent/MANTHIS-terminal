@@ -18,11 +18,11 @@ class BuyingList:
         if self.active_tile_handler.get().item_stock.get_name() == item_stock.get_name()\
                 and self.active_tile_handler.get().item_stock.get_amount() < 25:
             self.active_tile_handler.add(1)
+            self.master.winfo_toplevel().slider.set(self.active_tile_handler.get().item_stock.get_amount())
         else:
             self.items.append(item_stock)
             self.render(item_stock)
         self.total()
-
 
     def render(self, item_stock: ItemStock):
         tile = item_stock.create_item_tile(self.master)

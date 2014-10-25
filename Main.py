@@ -53,6 +53,7 @@ orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
 orderFrame.grid(column=0, row=0, rowspan=2)
 orderFrame.grid_propagate(False)
 root.order_frame = orderFrame
+
 #komen alle items in te staan (de artikelen)
 itemFrame = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100), bg="green")
 itemFrame.grid(column=1, row=0, columnspan=2)
@@ -65,12 +66,9 @@ overigFrame.pack_propagate(False)
 
 
 """vormt en plaatst kleinere frames"""
-orderlistFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
-orderlistFrame.grid(column=0, row=0)
-orderlistFrame.pack_propagate(False)
-root.orderlistFrame = orderlistFrame
-
-root.buying_list = BuyingList(orderlistFrame)
+orderlist = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
+orderlist.grid(column=0, row=0)
+orderlist.pack_propagate(False)
 
 infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
 infoFrame.grid(column=0, row=1)
@@ -90,9 +88,27 @@ plusminFrame.pack(anchor=N)
 
 
 """daadwerkelijke widgets"""
+def onconfigure(e):
+    ol_canvas.configure(scrollregion=ol_canvas.bbox("all"))
+
+ol_canvas = Canvas(orderlist, width=screenWidth/3, height=screenHeight/3*2)
+
 #scrollbar
-scrollBar = Scrollbar(orderlistFrame)
+scrollBar = Scrollbar(orderlist, command=ol_canvas.yview)
 scrollBar.pack(side=RIGHT, fill=Y)
+
+ol_canvas.configure(yscrollcommand=scrollBar.set)
+ol_canvas.pack(expand=True)
+
+orderlistFrame = Frame(ol_canvas)
+orderlistFrame.pack()
+root.orderlistFrame = orderlistFrame
+ol_canvas.create_window((4, 4), window=orderlistFrame, anchor=NW)
+orderlistFrame.bind("<Configure>", onconfigure)
+
+
+root.buying_list = BuyingList(orderlistFrame)
+
 #einde scrollbar
 bedragTxtLabel = Label(infoFrame, text="Bedrag: ", bd=20)
 bedragTxtLabel.grid(column=0, row=0)
