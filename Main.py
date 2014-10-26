@@ -7,6 +7,7 @@ from tkinter import *
 import json
 
 
+
 root = Tk(screenName="Name", baseName="Name", className="Name")
 root.item_registry = ItemRegistry()
 root.resizable(width=FALSE, height=FALSE)

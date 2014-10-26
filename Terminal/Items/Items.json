@@ -1,18 +1,70 @@
 [
     {
-    "name": "Item",
-    "price": 0.25
-    },
-    {
-    "name": "item2",
+    "name": "Grolsch Pilsener",
     "price": 0.50
     },
     {
-    "name": "item3",
+    "name": "Grolsch Pul",
+    "price": 1.50
+    },
+    {
+    "name": "Warsteiner",
     "price": 1.00
     },
     {
-    "name": "item4",
-    "price": 2.50
+    "name": "Coca Cola",
+    "price": 1.00
+    },
+    {
+    "name": "Fanta",
+    "price": 1.00
+    },
+    {
+    "name": "Sisi",
+    "price": 1.00
+    },
+    {
+    "name": "Cassis",
+    "price": 1.00
+    },
+    {
+    "name": "Jus d'Orange",
+    "price": 1.50
+    },
+    {
+    "name": "Water",
+    "price": 0.50
+    },
+    {
+    "name": "Thee",
+    "price": 1.00
+    },
+    {
+    "name": "Koffie",
+    "price": 1.50
+    },
+    {
+    "name": "Coca Cola BerenBurg",
+    "price": 2.00
+    },
+    {
+    "name": "Amstel",
+    "price": 1.00
+    },
+    {
+    "name": "Heiniken",
+    "price": 1.00
+    },
+    {
+    "name": "Red Bull",
+    "price": 2.00
+    },
+    {
+    "name": "Flugel",
+    "price": 1.50
+    },
+    {
+    "name": "Jack Daniels",
+    "price": 2.00
     }
 ]
