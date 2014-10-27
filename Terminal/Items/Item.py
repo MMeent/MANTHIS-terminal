@@ -38,24 +38,30 @@ class Item:
         return self.tile
 
     def create_item_tile(self, column=0, row=0, parent=None):
-        tile = Frame(parent, bg="black", width=150, height=150, border=1)
+        labelbg = "grey"
+        tileheigth = 150
+        tilewidth = 171
+        tile = Frame(parent, bg=labelbg, width=tilewidth, height=tileheigth, border=1)
         tile.grid_propagate(False)
         tile.grid(column=column, row=row)
 
         if self.image_link:
             img = PhotoImage(file=self.image_link)
-            tile.img_lbl = Label(tile, image=img, height=100, width=150)
+            tile.img_lbl = Label(tile, image=img, height=100, width=tilewidth)
             tile.img_lbl.img = img
             tile.img_lbl.grid(column=0, row=0, columnspan=3)
         else:
-            tile.img_lbl = Frame(tile, height=100, width=150)
+            tile.img_lbl = Frame(tile, height=100, width=tilewidth)
             tile.img_lbl.grid(column=0, row=0, columnspan=3)
 
-        tile.name_label = Label(tile, text=self.name)
-        tile.name_label.grid(column=0, row=1, columnspan=2)
+        tile.name_label = Label(tile, text=self.name, font="Arial 13 bold", bg=labelbg)
+        tile.name_label.grid(column=0, row=1, columnspan=3, sticky=W)
 
-        tile.price_label = Label(tile, text=str(self.price))
-        tile.price_label.grid(column=2, row=1)
+        #tile.prijs = Label(tile, text="Prijs:", font="Arial 11", bg=labelbg)
+        #tile.prijs.grid(column=1, row=2, sticky=E)
+
+        tile.price_label = Label(tile, text="Prijs: € "+str(self.price)+"0", font="Arial 11", bg=labelbg)
+        tile.price_label.grid(column=2, row=2, sticky=E)
 
         tile.item = self
 

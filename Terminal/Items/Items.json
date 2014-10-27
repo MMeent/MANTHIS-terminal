@@ -1,6 +1,6 @@
 [
     {
-    "name": "Grolsch Pilsener",
+    "name": "Grolsch Pils",
     "price": 0.50
     },
     {
@@ -44,7 +44,7 @@
     "price": 1.50
     },
     {
-    "name": "Coca Cola BerenBurg",
+    "name": "CC BerenBurg",
     "price": 2.00
     },
     {
@@ -52,7 +52,7 @@
     "price": 1.00
     },
     {
-    "name": "Heiniken",
+    "name": "Heineken",
     "price": 1.00
     },
     {
