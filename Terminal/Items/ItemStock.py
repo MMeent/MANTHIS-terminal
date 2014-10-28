@@ -32,19 +32,31 @@ class ItemStock:
         return self.tile
 
     def create_item_tile(self, parent):
-        tile = Frame(parent, bg="gray", width=341, height=80)
+        tile_bg = "#2B2B2B"
+        tile_line = "#A3A3A3"
+        tile_fontcollor = "#9ca9b6"
+
+        tile = Frame(parent, bg=tile_bg, width=341, height=60)
         tile.grid_propagate(False)
-        tile.name_label = Label(tile, text=self.item.get_name(), font=("Ariel", 14, "bold"))
-        tile.name_label.grid(column=0, row=0)
-        tile.amount_label = Label(tile, text=self.amount, font=("Ariel", 12))
-        tile.amount_label.grid(column=1, row=0)
-        tile.price_label = Label(tile, text=self.get_price(), font=("Ariel", 15, "bold"))
-        tile.price_label.grid(column=2, row=0)
+
+        tile.testFrame = Frame(tile, width=170, bg=tile_line)
+        tile.testFrame.grid(column=0, row=0)
+
+        tile.test2Frame = Frame(tile, width=151, bg=tile_line)
+        tile.test2Frame.grid(column=1, row=0)
+
+        tile.name_label = Label(tile, text=self.item.get_name(), bg=tile_bg, font="Ariel 14 bold", fg=tile_fontcollor)
+        tile.name_label.grid(column=0, row=1, sticky=W)
+
+        tile.amount_label = Label(tile, text="Aantal: "+str(self.amount), bg=tile_bg, font=("Ariel", 12), fg=tile_fontcollor)
+        tile.amount_label.grid(column=1, row=1, sticky=E)
+        tile.price_label = Label(tile, text="Prijs: € "+str(self.get_price())+"0", bg=tile_bg, font="Ariel 10 bold", fg=tile_fontcollor)
+        tile.price_label.grid(column=1, row=2, sticky=E)
         tile.item_stock = self
 
         def update():
-            tile.price_label["text"] = tile.item_stock.get_price()
-            tile.amount_label["text"] = tile.item_stock.get_amount()
+            tile.price_label["text"] = "Prijs: € "+str(tile.item_stock.get_price())+"0"
+            tile.amount_label["text"] = "Aantal: "+ str(tile.item_stock.get_amount())
 
         tile.update = update
 

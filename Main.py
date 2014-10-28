@@ -107,10 +107,16 @@ root.orderlistFrame = orderlistFrame
 ol_canvas.create_window((4, 4), window=orderlistFrame, anchor=NW)
 orderlistFrame.bind("<Configure>", onconfigure)
 
-
 root.buying_list = BuyingList(orderlistFrame)
-
 #einde scrollbar
+###########scrollbar voor tile frame
+itemScrollbarFrame = Frame(itemFrame, height=(screenHeight-100), width=15)
+itemScrollbarFrame.grid(column=5, row=0, rowspan=6, sticky=N)
+itemScrollbarFrame.pack_propagate(False)
+
+itemScrollbar = Scrollbar(itemScrollbarFrame)
+itemScrollbar.pack(side=RIGHT, fill=Y)
+
 bedragTxtLabel = Label(infoFrame, text="Bedrag: ", bd=20)
 bedragTxtLabel.grid(column=0, row=0)
 bedragLabel = Label(infoFrame, textvariable=root.buying_list.total_str, bd=20)
