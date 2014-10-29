@@ -44,7 +44,7 @@ class Item:
 
         labelbg = "grey"
         tileheigth = 150
-        tilewidth = 167
+        tilewidth = 165
         tile = Frame(parent, bg=tile_bg, width=tilewidth, height=tileheigth, border=1)
         tile.grid_propagate(False)
         tile.grid(column=column, row=row)

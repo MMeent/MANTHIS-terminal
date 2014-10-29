@@ -89,10 +89,16 @@ plusminFrame.pack(anchor=N)
 
 
 """daadwerkelijke widgets"""
-def onconfigure(e):
+
+
+def ol_onconfigure(e):
     ol_canvas.configure(scrollregion=ol_canvas.bbox("all"))
 
-ol_canvas = Canvas(orderlist, width=screenWidth/3, height=screenHeight/3*2)
+
+def i_onconfigure(e):
+    i_canvas.configure(scrollregion=i_canvas.bbox("all"))
+
+ol_canvas = Canvas(orderlist, width=screenWidth/3-20, height=screenHeight/3*2)
 
 #scrollbar
 scrollBar = Scrollbar(orderlist, command=ol_canvas.yview)
@@ -105,17 +111,24 @@ orderlistFrame = Frame(ol_canvas)
 orderlistFrame.pack()
 root.orderlistFrame = orderlistFrame
 ol_canvas.create_window((4, 4), window=orderlistFrame, anchor=NW)
-orderlistFrame.bind("<Configure>", onconfigure)
+orderlistFrame.bind("<Configure>", ol_onconfigure)
 
 root.buying_list = BuyingList(orderlistFrame)
-#einde scrollbar
-###########scrollbar voor tile frame
-itemScrollbarFrame = Frame(itemFrame, height=(screenHeight-100), width=15)
-itemScrollbarFrame.grid(column=5, row=0, rowspan=6, sticky=N)
-itemScrollbarFrame.pack_propagate(False)
+# einde scrollbar
+# scrollbar voor tile frame
+i_canvas = Canvas(itemFrame, width=screenWidth/3*2-24, height=screenHeight/3*2)
 
-itemScrollbar = Scrollbar(itemScrollbarFrame)
+itemScrollbar = Scrollbar(itemFrame, command=i_canvas.yview)
 itemScrollbar.pack(side=RIGHT, fill=Y)
+
+i_canvas.configure(yscrollcommand=itemScrollbar.set)
+i_canvas.pack(expand=True)
+
+items = Frame(i_canvas)
+items.pack()
+root.itemFrame = items
+i_canvas.create_window((4, 4), window=items, anchor=NW)
+items.bind("<Configure>", i_onconfigure)
 
 bedragTxtLabel = Label(infoFrame, text="Bedrag: ", bd=20)
 bedragTxtLabel.grid(column=0, row=0)
@@ -158,7 +171,7 @@ with open("Terminal/Items/Items.json") as jsonfile:
 i = 0
 for item in root.item_registry.get_items():
     print(item[1].tile)
-    item[1].create_item_tile(i % 4, i // 4, itemFrame)
+    item[1].create_item_tile(i % 4, i // 4, items)
     i += 1
 
 itemFrame.grid()
