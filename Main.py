@@ -16,8 +16,8 @@ screenHeight = 720
 root.geometry('{}x{}'.format(screenWidth, screenHeight))
 buttonSize = 300
 currentAantal = 26
+bg2 = "#3c3f41"
 bg = "#2B2B2B"
-bg2 = "#2B2B2B"
 fontcollor = "#9ca9b6"
 
 
@@ -56,7 +56,7 @@ def afrekenClick():
 
 """ vormt en plaatst de drie grote frames die scherm opdelen"""
 #oderFrame komt alles in wat met de info van de bestelling te maken heeft
-orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg="red")
+orderFrame = Frame(root, width=(screenWidth / 3), height=screenHeight, bg=bg2)
 orderFrame.grid(column=0, row=0, rowspan=2)
 orderFrame.grid_propagate(False)
 root.order_frame = orderFrame
@@ -104,7 +104,7 @@ def ol_onconfigure(e):
 def i_onconfigure(e):
     i_canvas.configure(scrollregion=i_canvas.bbox("all"))
 
-ol_canvas = Canvas(orderlist, width=screenWidth/3-20, height=screenHeight/3*2, bg=fontcollor)
+ol_canvas = Canvas(orderlist, width=screenWidth/3-20, height=screenHeight/3*2, bg=bg2)
 
 #scrollbar
 scrollBar = Scrollbar(orderlist, command=ol_canvas.yview)
@@ -122,7 +122,7 @@ orderlistFrame.bind("<Configure>", ol_onconfigure)
 root.buying_list = BuyingList(orderlistFrame)
 # einde scrollbar
 # scrollbar voor tile frame
-i_canvas = Canvas(itemFrame, width=screenWidth/3*2-24, height=screenHeight/3*2)
+i_canvas = Canvas(itemFrame, width=screenWidth/3*2-24, height=screenHeight/3*2, bg=bg)
 
 itemScrollbar = Scrollbar(itemFrame, command=i_canvas.yview)
 itemScrollbar.pack(side=RIGHT, fill=Y)
@@ -136,12 +136,17 @@ root.itemFrame = items
 i_canvas.create_window((4, 4), window=items, anchor=NW)
 items.bind("<Configure>", i_onconfigure)
 
-bedragTxtLabel = Label(infoFrame, text="Bedrag: ", bd=20)
+bedragtxtFrame = Frame(infoFrame, bg=bg2)
+bedragtxtFrame.pack(pady=20)
+
+bedragTxtLabel = Label(bedragtxtFrame, text="Eindprijs: €", fg=fontcollor, font="Arial 25 bold", bg=bg2)
 bedragTxtLabel.grid(column=0, row=0)
-bedragLabel = Label(infoFrame, textvariable=root.buying_list.total_str, bd=20)
+bedragLabel = Label(bedragtxtFrame, textvariable=root.buying_list.total_str, fg=fontcollor, font="Arial 25 bold", bd=0, bg=bg2)
 bedragLabel.grid(column=1, row=0)
-statusLabel = Label(infoFrame, text="Wachtend", bd=20)
-statusLabel.grid(column=0, row=1)
+nullLabel = Label(bedragtxtFrame, text="0", fg=fontcollor, font="Arial 25 bold", bd=0, bg=bg2)
+nullLabel.grid(column=2, row=0)
+statusLabel = Label(infoFrame, text="Wachtend", bd=20, fg=fontcollor, bg=bg2)
+statusLabel.pack(anchor=S)
 
 root.scrollBar = scrollBar
 
@@ -161,11 +166,11 @@ plusLabel.bind("<Button>", plusLabel.on_click)
 minLabel.on_click = min_click
 minLabel.bind("<Button>", minLabel.on_click)
 
-slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, from_=1, to=25, command=u)
+slider = Scale(overigFrame, orient=HORIZONTAL, showvalue=0, from_=1, to=25, command=u, bg=fontcollor, troughcolor=fontcollor)
 slider.pack(fill=X, side=BOTTOM)
 root.slider = slider
 
-afrekenButton = Button(afrekenbuttonFrame, text="Afrekenen", command=afrekenClick, height=50)
+afrekenButton = Button(afrekenbuttonFrame, text="Afrekenen", command=afrekenClick, height=50, bg=bg2, relief=GROOVE, font="Arial 12 bold", fg=fontcollor)
 afrekenButton.pack(fill=BOTH)
 
 
