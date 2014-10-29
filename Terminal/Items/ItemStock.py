@@ -39,9 +39,9 @@ class ItemStock:
         tile = Frame(parent, bg=tile_bg, width=341, height=60)
         tile.grid_propagate(False)
 
+        #testframes zorgen ervoor dat de labels goed in beeld komen
         tile.testFrame = Frame(tile, width=170, bg=tile_line)
         tile.testFrame.grid(column=0, row=0)
-
         tile.test2Frame = Frame(tile, width=151, bg=tile_line)
         tile.test2Frame.grid(column=1, row=0)
 

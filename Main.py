@@ -16,6 +16,12 @@ screenHeight = 720
 root.geometry('{}x{}'.format(screenWidth, screenHeight))
 buttonSize = 300
 currentAantal = 26
+bg = "#2B2B2B"
+bg2 = "#2B2B2B"
+fontcollor = "#9ca9b6"
+
+
+bgOverigFrame = "#3c3f41"
 
 """functies voor slider en label"""
 
@@ -60,18 +66,18 @@ itemFrame = Frame(root, width=(screenWidth / 3 * 2), height=(screenHeight - 100)
 itemFrame.grid(column=1, row=0, columnspan=2)
 itemFrame.grid_propagate(False)
 #overigFrame komt alle andere functionaliteiten in
-overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100)
-overigFrame.grid(column=1, row=1, columnspan=2)
+overigFrame = Frame(root, width=(screenWidth / 3 * 2), height=100, bg=bgOverigFrame)
+overigFrame.grid(column=1, row=1, columnspan=2, sticky=S)
 overigFrame.pack_propagate(False)
 """einde grote frames"""
 
 
 """vormt en plaatst kleinere frames"""
-orderlist = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2)
+orderlist = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3*2, bg=bg)
 orderlist.grid(column=0, row=0)
 orderlist.pack_propagate(False)
 
-infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3)
+infoFrame = Frame(orderFrame, width=screenWidth/3, height=screenHeight/3, bg=bg2)
 infoFrame.grid(column=0, row=1)
 infoFrame.grid_propagate(False)
 
@@ -80,7 +86,7 @@ afrekenbuttonFrame.pack(side=RIGHT, anchor=N)
 afrekenbuttonFrame.pack_propagate(False)
 
 #frame voor - aantal +
-plusminFrame = Frame(overigFrame)
+plusminFrame = Frame(overigFrame, bg=bgOverigFrame)
 plusminFrame.pack(anchor=N)
 #plusminFrame.grid_propagate(False)
 
@@ -98,7 +104,7 @@ def ol_onconfigure(e):
 def i_onconfigure(e):
     i_canvas.configure(scrollregion=i_canvas.bbox("all"))
 
-ol_canvas = Canvas(orderlist, width=screenWidth/3-20, height=screenHeight/3*2)
+ol_canvas = Canvas(orderlist, width=screenWidth/3-20, height=screenHeight/3*2, bg=fontcollor)
 
 #scrollbar
 scrollBar = Scrollbar(orderlist, command=ol_canvas.yview)
@@ -141,13 +147,13 @@ root.scrollBar = scrollBar
 
 #slider
 
-aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 35",  width=2)
+aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 35",  width=2, bg=bgOverigFrame, fg=fontcollor)
 aantalLabel.grid(column=1, row=0)
 root.update = update
 
-plusLabel = Label(plusminFrame, text=" + ", font="Arial 46")
+plusLabel = Label(plusminFrame, text=" + ", font="Arial 46", bg=bgOverigFrame, fg=fontcollor)
 plusLabel.grid(column=2, row=0)
-minLabel = Label(plusminFrame, text=" − ", font="Arial 46")
+minLabel = Label(plusminFrame, text=" − ", font="Arial 46", bg=bgOverigFrame, fg=fontcollor)
 minLabel.grid(column=0, row=0)
 
 plusLabel.on_click = plus_click

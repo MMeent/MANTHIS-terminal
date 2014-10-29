@@ -39,7 +39,7 @@ class Item:
 
     def create_item_tile(self, column=0, row=0, parent=None):
         tile_bg = "#2B2B2B"
-        tile_line = "#A3A3A3"
+
         tile_fontcollor = "#9ca9b6"
 
         labelbg = "grey"
