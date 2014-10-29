@@ -58,13 +58,19 @@ class ItemStock:
             tile.price_label["text"] = "Prijs: € "+str(tile.item_stock.get_price())+"0"
             tile.amount_label["text"] = "Aantal: "+ str(tile.item_stock.get_amount())
 
-        tile.update = update
-
         def on_click(event):
             tile.focus_set()
             tile.winfo_toplevel().buying_list.set_active_tile(tile)
 
+        def delete():
+            tile.pack_forget()
+            tile.winfo_toplevel().buying_list.set_active_tile(tile.winfo_toplevel().buying_list.last().tile)
+            tile.winfo_toplevel().buying_list.remove(tile.item_stock)
+            tile.destroy()
+
         tile.on_click = on_click
+        tile.delete = delete
+        tile.update = update
 
         tile.bind("<Button-1>", on_click)
 

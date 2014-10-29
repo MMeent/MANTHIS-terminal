@@ -38,3 +38,12 @@ class BuyingList:
 
     def set_active_tile(self, tile: Frame):
         self.active_tile_handler.set_tile(tile)
+
+    def last(self):
+        return self.items[len(self.items) - 1]
+
+    def remove(self, item):
+        try:
+            self.items.remove(item)
+        finally:
+            pass

@@ -36,6 +36,11 @@ def min_click(event):
     root.update()
 
 
+def delete_click(event):
+    root.buying_list.active_tile_handler.get().delete()
+    root.update()
+
+
 def u(e):
     root.update()
 
@@ -153,14 +158,18 @@ root.scrollBar = scrollBar
 #slider
 
 aantalLabel = Label(plusminFrame, text=currentAantal, font="Arial 35",  width=2, bg=bgOverigFrame, fg=fontcollor)
-aantalLabel.grid(column=1, row=0)
+aantalLabel.grid(column=2, row=0)
 root.update = update
 
+deleteLabel = Label(plusminFrame, text=" × ", font="Arial 46", bg=bgOverigFrame, fg=fontcollor)
+deleteLabel.grid(column=0, row=0)
 plusLabel = Label(plusminFrame, text=" + ", font="Arial 46", bg=bgOverigFrame, fg=fontcollor)
-plusLabel.grid(column=2, row=0)
+plusLabel.grid(column=3, row=0)
 minLabel = Label(plusminFrame, text=" − ", font="Arial 46", bg=bgOverigFrame, fg=fontcollor)
-minLabel.grid(column=0, row=0)
+minLabel.grid(column=1, row=0)
 
+deleteLabel.on_click = delete_click
+deleteLabel.bind("<Button>", deleteLabel.on_click)
 plusLabel.on_click = plus_click
 plusLabel.bind("<Button>", plusLabel.on_click)
 minLabel.on_click = min_click
@@ -177,8 +186,10 @@ afrekenButton.pack(fill=BOTH)
 with open("Terminal/Items/Items.json") as jsonfile:
     data = json.load(jsonfile)
     for item in data:
-        root.item_registry.add(Item(item["name"], item["price"]))
-
+        try:
+            root.item_registry.add(Item(item["name"], item["price"], item["url"]))
+        except Exception:
+            root.item_registry.add(Item(item["name"], item["price"]))
 i = 0
 for item in root.item_registry.get_items():
     print(item[1].tile)
