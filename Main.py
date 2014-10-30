@@ -2,11 +2,16 @@ from Terminal.BuyingList import BuyingList
 from Terminal.Items.Item import Item
 from Terminal.Registries import ItemRegistry
 
+import pymfrc
+import connection
+
 from tkinter import *
 
+import random
 import json
 
-
+connect = connection.serverConnection()
+rnd = random.getrandbits
 
 root = Tk(screenName="Name", baseName="Name", className="Name")
 root.item_registry = ItemRegistry()
@@ -53,7 +58,18 @@ def update():
 
 
 def afrekenClick():
-    return
+    total = root.buying_list.get_total()
+    scan = pymfrc.scan(2)
+    id = scan[:4]
+    seed = scan[-12:]
+    write = id
+    for value in range(0, 15):
+        write.append(chr(rnd(8)))
+    while not write == pymfrc.write(2, write):
+        pass
+    if not connect.transact(id, write[-12:], total, seed):
+        pass
+
 
 
 """einde functies"""
