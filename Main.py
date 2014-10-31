@@ -62,20 +62,17 @@ def afrekenClick():
     scan = pymfrc.scan(2)
     id = str(scan[:4])
     seed = str(scan[-12:])
-    new_seed = ""
-    for value in range(0, 11):
-        new_seed += str(rnd(0, 9))
-
+    new_seed = str(random.randrange(0, 2**31))
 
     print("id " + id)
     print("hash " + seed)
     print("new hash: " + new_seed)
 
-    while not id + new_seed == pymfrc.write(2, id + new_seed):
-        pass
-    if not connect.transact(id, new_seed, total, seed):
-        pass
-    root.buying_list.clear()
+    if id + new_seed == pymfrc.write(2, id + new_seed):
+        if not connect.transact(id, int(new_seed), total, int(seed)):
+            root.buying_list.clear()
+
+    return True
 
 
 
