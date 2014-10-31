@@ -6,62 +6,77 @@
     },
     {
     "name": "Grolsch Pul",
+    "url": "Terminal/Items/photos/grolschPul.png",
     "price": 1.50
     },
     {
     "name": "Warsteiner",
+    "url": "Terminal/Items/photos/warsteiner.png",
     "price": 1.00
     },
     {
     "name": "Coca Cola",
+    "url": "Terminal/Items/photos/cocacola.png",
     "price": 1.00
     },
     {
     "name": "Fanta",
+    "url": "Terminal/Items/photos/fanta.png",
     "price": 1.00
     },
     {
     "name": "Sisi",
+    "url": "Terminal/Items/photos/sisi.png",
     "price": 1.00
     },
     {
     "name": "Cassis",
+    "url": "Terminal/Items/photos/CASSIS.png",
     "price": 1.00
     },
     {
     "name": "Jus d'Orange",
+    "url": "Terminal/Items/photos/jus.png",
     "price": 1.50
     },
     {
     "name": "Water",
+    "url": "Terminal/Items/photos/water.png",
     "price": 0.50
     },
     {
     "name": "Thee",
+    "url": "Terminal/Items/photos/thee.png",
     "price": 1.00
     },
     {
     "name": "Koffie",
+    "url": "Terminal/Items/photos/koffie.png",
     "price": 1.50
     },
     {
     "name": "Amstel",
+    "url": "Terminal/Items/photos/amstel.png",
     "price": 1.00
     },
     {
     "name": "Heineken",
+    "url": "Terminal/Items/photos/heineken.png",
     "price": 1.00
     },
     {
     "name": "Red Bull",
+    "url": "Terminal/Items/photos/redbull.png",
     "price": 2.00
     },
     {
     "name": "Flugel",
+    "url": "Terminal/Items/photos/flugel.png",
     "price": 1.50
     },
     {
     "name": "Jack Daniels",
+    "url": "Terminal/Items/photos/jackdaniels.png",
     "price": 2.00
     }
 ]

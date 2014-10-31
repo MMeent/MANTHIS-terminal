@@ -143,7 +143,7 @@ orderlistFrame.bind("<Configure>", ol_onconfigure)
 root.buying_list = BuyingList(orderlistFrame)
 # einde scrollbar
 # scrollbar voor tile frame
-i_canvas = Canvas(itemFrame, width=screenWidth/3*2-24, height=screenHeight/3*2, bg=bg)
+i_canvas = Canvas(itemFrame, width=screenWidth/3*2-24, height=screenHeight-100, bg=bg)
 
 itemScrollbar = Scrollbar(itemFrame, command=i_canvas.yview)
 itemScrollbar.pack(side=RIGHT, fill=Y)
