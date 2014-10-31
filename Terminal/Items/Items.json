@@ -78,5 +78,25 @@
     "name": "Jack Daniels",
     "url": "Terminal/Items/photos/jackdaniels.png",
     "price": 2.00
+    },
+    {
+    "name": "Malibu",
+    "url": "Terminal/Items/photos/malibu.png",
+    "price": 2.00
+    },
+    {
+    "name": "Brandewijn",
+    "url": "Terminal/Items/photos/brandewijn.png",
+    "price": 2.50
+    },
+    {
+    "name": "Passoa",
+    "url": "Terminal/Items/photos/passoa.png",
+    "price": 2.50
+    },
+    {
+    "name": "Wodka",
+    "url": "Terminal/Items/photos/wodka.png",
+    "price": 2.00
     }
 ]
