@@ -67,7 +67,7 @@ def afrekenClick():
         new_seed.append(chr(rnd(8)))
 
     nnes_seed = 0
-    for v in new_seed:
+    for y in new_seed:
         nnes_seed *= 2**9
         nnes_seed += ord(y)
 
