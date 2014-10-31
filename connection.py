@@ -13,7 +13,7 @@ class serverConnection:
         self.sock.sendall(data)
 
     def transact(self, fr_id, next_seed, amount, last_seed):
-        data = "%s,%s,%s,%s" % (fr_id, next_seed, amount, last_seed)
+        data = "%s,5,%s,%s,%s" % (fr_id, amount, last_seed,next_seed)
         msg = self.RSAServer.encrypt(data.encode("utf8"), None)
         self.sock.sendall(msg[0])
         return self.RSALocal.decrypt(self.sock.recv(4096))
