@@ -3,21 +3,19 @@ __author__ = 'Matthias'
 
 class ItemRegistry:
     def __init__(self):
-        self.items = Registry()
+        self._items = Registry()
 
     def add(self, item):
-        if not self.items[item.name]:
-            self.items[item.name] = item
+        if not self._items[item.name]:
+            self._items[item.name] = item
 
     def get(self, name):
-        if not self.items[name]:
-            return None
-        return self.items[name]
+        return self._items[name]
 
     def get_items(self):
-        return self.items.items()
+        return self._items.items()
 
 
 class Registry(dict):
     def __missing__(self, key):
-        return False
+        return None

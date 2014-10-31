@@ -6,23 +6,28 @@ from tkinter import *
 
 
 class BuyingList:
-    def __init__(self):
+    def __init__(self, root):
+        self.master = root
         self.total_str = StringVar()
         self.items = []
         self.total = self.get_total
         self.active_tile_handler = ActiveTileHandler()
         self.total()
 
-    def add(self, stock: ItemStock):
-        if self.active_tile_handler.get().get_name() == stock.get_name():
+    def add(self, item_stock: ItemStock):
+        if self.active_tile_handler.get().item_stock.get_name() == item_stock.get_name()\
+                and self.active_tile_handler.get().item_stock.get_amount() < 25:
             self.active_tile_handler.add(1)
+            self.master.winfo_toplevel().slider.set(self.active_tile_handler.get().item_stock.get_amount())
         else:
-            self.items.append(stock)
+            self.items.append(item_stock)
+            self.render(item_stock)
         self.total()
-        self.render()
 
-    def render(self):
-        pass
+    def render(self, item_stock: ItemStock):
+        tile = item_stock.create_item_tile(self.master)
+        tile.pack()
+        self.active_tile_handler.set_tile(tile)
 
     def get_total(self):
         total = 0
@@ -33,3 +38,12 @@ class BuyingList:
 
     def set_active_tile(self, tile: Frame):
         self.active_tile_handler.set_tile(tile)
+
+    def last(self):
+        return self.items[len(self.items) - 1]
+
+    def remove(self, item):
+        try:
+            self.items.remove(item)
+        finally:
+            pass
