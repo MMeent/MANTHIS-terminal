@@ -47,3 +47,7 @@ class BuyingList:
             self.items.remove(item)
         finally:
             pass
+
+    def clear(self):
+        for i in self.items:
+            i.get_tile().delete()
