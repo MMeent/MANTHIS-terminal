@@ -62,7 +62,7 @@ def afrekenClick():
     scan = pymfrc.scan(2)
     id = str(scan[:4])
     seed = str(scan[-12:])
-    new_seed = str(random.randrange(0, 2**31))
+    new_seed = str(random.randrange(0, 2**31)).rjust(12, '0')
 
     print("id " + id)
     print("hash " + seed)
