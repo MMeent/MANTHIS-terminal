@@ -11,7 +11,7 @@ import random
 import json
 
 connect = connection.serverConnection()
-rnd = random.getrandbits
+rnd = random.randrange
 
 root = Tk(screenName="Name", baseName="Name", className="Name")
 root.item_registry = ItemRegistry()
@@ -60,34 +60,20 @@ def update():
 def afrekenClick():
     total = root.buying_list.get_total()
     scan = pymfrc.scan(2)
-    id = scan[:4]
-    seed = scan[-12:]
-    new_seed = []
+    id = str(scan[:4])
+    seed = str(scan[-12:])
+    new_seed = ""
     for value in range(0, 11):
-        new_seed.append(chr(rnd(8)))
+        new_seed += str(rnd(0, 9))
 
-    nnes_seed = 0
-    for y in new_seed:
-        nnes_seed *= 2**9
-        nnes_seed += ord(y)
 
-    nn_seed = 0
-    for y in seed:
-        nn_seed *= 2**9
-        nn_seed += ord(y)
-
-    nn_id = 0
-    for y in id:
-        nn_id *= 2**9
-        nn_id += ord(y)
-
-    print("id " + str(nn_id))
-    print("hash " + str(nn_seed))
-    print("new hash: " + str(nnes_seed))
+    print("id " + id)
+    print("hash " + seed)
+    print("new hash: " + new_seed)
 
     while not id + new_seed == pymfrc.write(2, id + new_seed):
         pass
-    if not connect.transact(id, nnes_seed, total, nn_seed):
+    if not connect.transact(id, new_seed, total, seed):
         pass
     root.buying_list.clear()
 
